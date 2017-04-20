@@ -32,7 +32,7 @@ char		*choose_specifiers(va_list *args, t_string *rsrc, t_data *convert, char sp
 	else if (sp == 's' && convert->lenght == 0)
 		return (create_str_string(convert, va_arg(*args, char *)));
 	else if ((sp == 'c' && convert->lenght == L) || (sp == 'C'))//good
-		return (create_str_char_wide(rsrc, (wchar_t)va_arg(*args, wint_t)));
+		return (create_str_char_wide(rsrc, convert, (wchar_t)va_arg(*args, wint_t)));
 	else if (sp == 'o' || sp == 'O')
 		return (create_str_octal(convert, args));
 	else if (sp == 'x' || sp == 'X')

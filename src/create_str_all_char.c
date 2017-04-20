@@ -55,10 +55,15 @@ void		create_char(t_string *rsrc, t_data *convert, unsigned char ch)
 		rsrc->count_print++;
 }
 
-char		*create_str_char_wide(t_string *rsrc, wchar_t ch)
+char		*create_str_char_wide(t_string *rsrc, t_data *convert, wchar_t ch)
 {
 	if (ch)
-        return (convert_char(ch, 0, 0, 2));
+    {
+        if ((int)ch > 127)
+            return (convert_char(ch, 0, 0, 2));
+        else
+            create_char(rsrc, convert, (unsigned char)ch);
+    }
 	else
 	{
 		ft_putchar(ch);

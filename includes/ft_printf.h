@@ -111,7 +111,7 @@ char		*create_chars_wide(t_string *rsrc, wchar_t* str);
 char        *set_width_str(t_data *convert, char *str);
 
 void		create_char(t_string *rsrc, t_data *convert, unsigned char ch);
-char		*create_str_char_wide(t_string *rsrc, wchar_t ch);
+char		*create_str_char_wide(t_string *rsrc, t_data *convert, wchar_t ch);
 char		*convert_utf8(char *sch, size_t len);
 char		*convert_char(wchar_t ch, size_t len, int i, int div);
 char		*first_byte(size_t len, char *first_byte);
