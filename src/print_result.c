@@ -28,7 +28,7 @@ static char *create_str_percent(t_data *convert)
 char		*choose_specifiers(va_list *args, t_string *rsrc, t_data *convert, char sp)
 {
 	if ((sp == 's' && convert->lenght == L) || (sp == 'S'))//good
-		return (create_str_string_wide(rsrc, va_arg(*args, wchar_t *)));
+		return (create_str_string_wide(rsrc, convert, va_arg(*args, wchar_t *)));
 	else if (sp == 's' && convert->lenght == 0)
 		return (create_str_string(convert, va_arg(*args, char *)));
 	else if ((sp == 'c' && convert->lenght == L) || (sp == 'C'))//good
@@ -43,7 +43,9 @@ char		*choose_specifiers(va_list *args, t_string *rsrc, t_data *convert, char sp
 		return (create_str_pointer(convert, va_arg(*args, void *)));
 	else if (sp == '%')
 		return (create_str_percent(convert));
-	return ("ERROR_SPECIFIERS");
+    else if (sp == '&')
+        create_char(rsrc, convert, *current_str(*rsrc, -1));
+    return ("");
 }
 
 void	print_result(va_list *args, t_string *rsrc, t_data *convert)

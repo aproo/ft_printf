@@ -31,5 +31,14 @@ int		identify_specifiers(t_string *rsrc, t_data *convert)
 		return (OK);
 	}
 	else
-		return (ERROR);
+	{
+		while (!(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z'))
+		{
+			rsrc->current_index++;
+			ch = *current_str(*rsrc, 0);
+		}
+		convert->specifier = '&';
+		rsrc->current_index++;
+		return (OK);
+	}
 }

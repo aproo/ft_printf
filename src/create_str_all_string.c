@@ -44,7 +44,8 @@ char        *set_width_str(t_data *convert, char *str)
     else
         result = ft_strjoin(tmp, str);
     free(tmp);
-    if (convert->specifier == 'p' && !convert->flags.left_justify && convert->flags.fill_zeros)
+    if (convert->specifier == 'p' && !convert->flags.left_justify
+        && convert->flags.fill_zeros)
     {
         result[1] = 'x';
         result[convert->width - ft_strlen(str) + 1] = '0';
@@ -52,9 +53,8 @@ char        *set_width_str(t_data *convert, char *str)
     return (result);
 }
 
-char		*create_chars_wide(t_string *rsrc, wchar_t* str)
+char		*create_chars_wide(t_data *convert, wchar_t* str)
 {
-	(void)rsrc;
 	size_t	i;
 	char	*result;
 	char 	*tmp;
@@ -63,10 +63,21 @@ char		*create_chars_wide(t_string *rsrc, wchar_t* str)
 	result = ft_strdup("");
 	while (str[i])
 	{
-		tmp = convert_char(str[i], 0, 0, 2);
+        if (str[i] > 127)
+		    tmp = convert_char(str[i], 0, 0, 2);
+        else
+        {
+            tmp = ft_strnew(1);
+            tmp[0] = str[i];
+        }
 		result = ft_strjoin(result, tmp);
 		i++;
 	}
+//    printf("[%s]\n", result);
+    if (convert->precision || convert->set_precision)
+        result = set_precision_str(convert, result);
+    if (result && convert->width > ft_strlen(result))
+        result = set_width_str(convert, result);
 	return (result);
 }
 
@@ -80,19 +91,19 @@ char		*create_str_string(t_data *convert, char* str)
         result = str;
     if (convert->precision || convert->set_precision)
         result = set_precision_str(convert, str);
-	if (result && convert->width)
+	if (result && (convert->width > ft_strlen(result)))
 		result = set_width_str(convert, result);
 	return (result);
 
 }
 
-char		*create_str_string_wide(t_string *rsrc, wchar_t* str)
+char		*create_str_string_wide(t_string *rsrc, t_data *convert, wchar_t* str)
 {
 	if (str)
-		return (create_chars_wide(rsrc, str));
+		return (create_chars_wide(convert, str));
 	else
 	{
-		ft_putstr("(NULL)");
+		ft_putstr("(null)");
 		rsrc->count_print += 6;
 	}
 	return ("");

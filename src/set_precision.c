@@ -23,26 +23,28 @@ static int spec_is_numbers(char ch)
 }
 
 
-void        check_width_numbers(t_data *convert, char **string, int width, int sign)
+void        check_width_numbers(t_data *convert, char **str, int width, int sign)
 {
     char    *tmp;
     char    *new;
 
-    tmp = *string;
+    tmp = *str;
     new = ft_strnew(width);
-    if (convert->flags.fill_zeros && !convert->precision && !convert->set_precision)
+    if ((convert->flags.fill_zeros && !convert->precision &&
+            !convert->set_precision) || (convert->specifier == '%' &&
+            !convert->flags.left_justify && convert->flags.fill_zeros))
         ft_memset(new, '0', width);
     else
         ft_memset(new, ' ', width);
 
     if (convert->flags.left_justify)
-        *string = ft_strjoin(tmp, new);
+        *str = ft_strjoin(tmp, new);
     else
-        *string = ft_strjoin(new, tmp);
+        *str = ft_strjoin(new, tmp);
     if (sign > 0 && convert->flags.fill_zeros)
     {
-        string[0][((sign == 1) ? 0 : 1)] = ((sign == 1) ? tmp[0] : tmp[1]);
-        string[0][((sign == 1) ? width : ++width)] = '0';
+        str[0][((sign == 1) ? 0 : 1)] = ((sign == 1) ? tmp[0] : tmp[1]);
+        str[0][((sign == 1) ? width : ++width)] = '0';
     }
     free(tmp);
     free(new);

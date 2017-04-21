@@ -106,8 +106,8 @@ char		*create_str_hexadecimal(t_data *convert, va_list *args);
 
 char		*create_str_string(t_data *convert, char* str);
 char        *set_precision_str(t_data *convert, char *str);
-char		*create_str_string_wide(t_string *rsrc, wchar_t* str);
-char		*create_chars_wide(t_string *rsrc, wchar_t* str);
+char		*create_str_string_wide(t_string *rsrc, t_data *convert, wchar_t* str);
+char		*create_chars_wide(t_data *convert, wchar_t* str);
 char        *set_width_str(t_data *convert, char *str);
 
 void		create_char(t_string *rsrc, t_data *convert, unsigned char ch);
