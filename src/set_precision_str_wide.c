@@ -16,6 +16,21 @@
 **	norm - OK; leaks - ?;
 */
 
+static int	amount_enters(char *str)
+{
+	int		i;
+	int		n;
+
+	i = -1;
+	n = 0;
+	while (str[++i] != '\0')
+	{
+		if (str[i] == '\n')
+			n++;
+	}
+	return (n);
+}
+
 void		convert_without_enter(char **str)
 {
 	int		i;
@@ -24,15 +39,9 @@ void		convert_without_enter(char **str)
 	char	*tmp;
 
 	i = -1;
-	n = 0;
-	while (str[0][++i] != '\0')
-	{
-		if (str[0][i] == '\n')
-			n++;
-	}
+	n = amount_enters(*str);
 	new = (char *)malloc(sizeof(char) * (ft_strlen(*str) - n + 1));
 	new[(ft_strlen(*str) - n)] = '\0';
-	i = -1;
 	n = 0;
 	tmp = *str;
 	while (str[0][++i])
@@ -102,35 +111,23 @@ char		*set_precision_str_wide(t_data *convert, char *str)
 
 char		*set_width_str_wide(t_data *convert, char *str)
 {
-	int 	i;
-	int 	n;
+	int		n;
+	int		len;
 	char	*tmp;
 	char	*result;
 
-	i = -1;
-	n = 0;
-	while (str[++i] != '\0')
-	{
-		if (str[i] == '\n')
-			n++;
-	}
-//	printf("%d\n", n);
-	tmp = (char *)malloc(sizeof(char) * convert->width - ft_strlen(str) + n + 1);
-	tmp[(convert->width - ft_strlen(str))] = '\0';
+	len = ft_strlen(str);
+	n = amount_enters(str);
+	tmp = (char *)malloc(sizeof(char) * convert->width - len + n + 1);
+	tmp[(convert->width - len)] = '\0';
 	if (convert->flags.fill_zeros)
-		ft_memset(tmp, '0', ((convert->width - ft_strlen(str) + n)));
+		ft_memset(tmp, '0', ((convert->width - len + n)));
 	else
-		ft_memset(tmp, ' ', ((convert->width - ft_strlen(str) + n)));
+		ft_memset(tmp, ' ', ((convert->width - len + n)));
 	if (convert->flags.left_justify)
 		result = ft_strjoin(str, tmp);
 	else
 		result = ft_strjoin(tmp, str);
 	free(tmp);
-	if (convert->specifier == 'p' && !convert->flags.left_justify
-		&& convert->flags.fill_zeros)
-	{
-		result[1] = 'x';
-		result[convert->width - ft_strlen(str) + 1] = '0';
-	}
 	return (result);
 }

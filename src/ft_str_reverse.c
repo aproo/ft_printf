@@ -22,7 +22,7 @@ char 		*ft_str_reverse(char *str)
     if (!str)
         return (0);
     size = ft_strlen(str);
-    if (!(new = (char *)malloc(sizeof(char) * size)))
+    if (!(new = (char *)malloc(sizeof(char) * size + 1)))
         return (0);
     new[size] = '\0';
     while (size > 0)
@@ -33,3 +33,5 @@ char 		*ft_str_reverse(char *str)
     //printf("str [%s] size [%zu]\nnew [%s] size [%zu]", str, ft_strlen(str), new, ft_strlen(new));
     return (new);
 }
+
+//1000101001110010
