@@ -6,11 +6,15 @@
 /*   By: vmakahon <vmakahon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 22:24:17 by vlad              #+#    #+#             */
-/*   Updated: 2017/03/20 21:45:08 by vmakahon         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:18:10 by vmakahon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Norm - OK, leaks - ?
+*/
 
 int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 {
@@ -23,7 +27,6 @@ int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 		convert->width = va_arg(*args, unsigned int);
 		rsrc->current_index++;
 		return (OK);
-//		printf("Search_width done!	[%c] = [%i]\n", ch, convert->width);
 	}
 	else if (ft_isdigit(ch))
 	{
@@ -34,9 +37,6 @@ int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 			i /= 10;
 			rsrc->current_index++;
 		}
-//		printf("Search_width done!	[%i]\n", convert->width);
 	}
-//	else
-//		printf("Search_width done!	[No width]\n");
 	return (OK);
 }

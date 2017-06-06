@@ -6,7 +6,7 @@
 /*   By: vmakahon <vmakahon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 06:28:04 by vmakahon          #+#    #+#             */
-/*   Updated: 2017/04/21 07:49:05 by vmakahon         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:10:52 by vmakahon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,16 @@ char		*set_precision_str_wide(t_data *convert, char *str)
 	int		x;
 	char	*result;
 
-	i = convert->precision;
 	j = 0;
 	x = 0;
-	result = (char *)malloc(sizeof(char) * convert->precision + 1);
-	result[convert->precision] = '\0';
-	while (i && str[x])
+	i = convert->precision;
+	result = (char *)malloc(sizeof(char) * ((convert->precision * 2) + 1));
+	result[(convert->precision * 2)] = '\0';
+	while (i >= 0 && str[x])
 	{
 		while (str[(j + x)] != '\n')
 			j++;
-		while (j-- <= i-- && j >= 0)
+		while (j-- <= i-- && j >= 0 && i >= 0)
 		{
 			result[x] = str[x];
 			x++;
@@ -106,6 +106,7 @@ char		*set_precision_str_wide(t_data *convert, char *str)
 			result[x++] = '\n';
 		j = 0;
 	}
+	result[x] = '\0';
 	return (result);
 }
 

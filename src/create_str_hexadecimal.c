@@ -6,15 +6,19 @@
 /*   By: vmakahon <vmakahon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 22:28:49 by vmakahon          #+#    #+#             */
-/*   Updated: 2017/04/03 09:22:29 by vmakahon         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:21:01 by vmakahon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static uintmax_t	set_leght_hexadecimal(int	len, va_list *args)
+/*
+**	Norm - OK, leaks - ?
+*/
+
+static uintmax_t	set_leght_hexadecimal(int len, va_list *args)
 {
-	uintmax_t	value;
+	uintmax_t		value;
 
 	value = 0;
 	if (len == L)
@@ -34,11 +38,11 @@ static uintmax_t	set_leght_hexadecimal(int	len, va_list *args)
 	return (value);
 }
 
-char		*create_str_hexadecimal(t_data *convert, va_list *args)
+char				*create_str_hexadecimal(t_data *convert, va_list *args)
 {
-	char 		*tmp;
-	uintmax_t	value;
-	char		*result;
+	char			*tmp;
+	uintmax_t		value;
+	char			*result;
 
 	value = set_leght_hexadecimal(convert->lenght, args);
 	if (convert->set_precision && convert->specifier != '%' && !value)

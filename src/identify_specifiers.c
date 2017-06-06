@@ -27,18 +27,12 @@ int		identify_specifiers(t_string *rsrc, t_data *convert)
 	{
 		convert->specifier = ch;
 		rsrc->current_index++;
-//		printf("Identify_specif done!	[%c]\n", ch);
 		return (OK);
 	}
-	else
+	else if (((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) && ch)
 	{
-		while (!(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z'))
-		{
+			convert->specifier = '&';
 			rsrc->current_index++;
-			ch = *current_str(*rsrc, 0);
-		}
-		convert->specifier = '&';
-		rsrc->current_index++;
-		return (OK);
 	}
+	return (OK);
 }

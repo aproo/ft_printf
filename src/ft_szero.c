@@ -20,7 +20,6 @@ void	ft_szero(t_string *rsrc, t_data *convert, t_flags *flags)
 		rsrc->count_print = 0;
 		rsrc->error = 0;
 		rsrc->str = NULL;
-//		printf("Set to zero [rsrc]\n");
 	}
 	if (convert)
 	{
@@ -28,7 +27,6 @@ void	ft_szero(t_string *rsrc, t_data *convert, t_flags *flags)
 		convert->precision = 0;
 		convert->lenght = 0;
 		convert->set_precision = 0;
-//		printf("Set to zero [convert]\n");
 	}
 	if (flags)
 	{
@@ -37,6 +35,5 @@ void	ft_szero(t_string *rsrc, t_data *convert, t_flags *flags)
 		flags->space = 0;
 		flags->fill_zeros = 0;
 		flags->hashtag = 0;
-//		printf("Set to zero [flags]\n");
 	}
 }

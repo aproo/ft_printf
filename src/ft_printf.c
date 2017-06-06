@@ -20,11 +20,8 @@ void	search_specificars(va_list *args, t_string *rsrc)
 
 	while ((ch = *(current_str(*rsrc, 0))))
 	{
-	//	printf("I am in search_specificarsn");
 		if (ch == '%')
-		{
 			analyze_specificar(args, rsrc);
-		}
 		else
 		{
 			ft_putchar(ch);

@@ -6,11 +6,15 @@
 /*   By: vmakahon <vmakahon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 06:27:08 by vmakahon          #+#    #+#             */
-/*   Updated: 2017/04/03 07:40:40 by vmakahon         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:29:25 by vmakahon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+/*
+** Norm - OK, leaks - ?
+*/
 
 char		*ft_itoa_uint_max(uintmax_t value, int base)
 {

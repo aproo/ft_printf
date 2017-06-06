@@ -6,7 +6,7 @@
 /*   By: vmakahon <vmakahon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 22:26:36 by vmakahon          #+#    #+#             */
-/*   Updated: 2017/04/03 08:22:46 by vmakahon         ###   ########.fr       */
+/*   Updated: 2017/05/02 09:07:35 by vmakahon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,21 @@ char		*set_width_str(t_data *convert, char *str)
 char		*create_chars_wide(t_data *convert, wchar_t *str)
 {
 	char	*result;
+	char	*tmp;
 
 	convert_with_enter(&result, str);
 	if (convert->precision || convert->set_precision)
+	{
+		tmp = result;
 		result = set_precision_str_wide(convert, result);
+		free(tmp);
+	}
 	if (result && convert->width > ft_strlen(result))
+	{
+		tmp = result;
 		result = set_width_str_wide(convert, result);
+		free(tmp);
+	}
 	convert_without_enter(&result);
 	return (result);
 }
