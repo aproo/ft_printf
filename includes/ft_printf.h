@@ -113,6 +113,7 @@ char        *set_width_str(t_data *convert, char *str);
 char        *set_width_str_wide(t_data *convert, char *str);
 void        convert_without_enter(char **str);
 void        convert_with_enter(char **result, wchar_t *str);
+int			amount_enters(char *str);
 
 void		create_char(t_string *rsrc, t_data *convert, unsigned char ch);
 char		*create_str_char_wide(t_string *rsrc, t_data *convert, wchar_t ch);

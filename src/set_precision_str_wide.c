@@ -16,7 +16,7 @@
 **	norm - OK; leaks - ?;
 */
 
-static int	amount_enters(char *str)
+int			amount_enters(char *str)
 {
 	int		i;
 	int		n;
@@ -103,7 +103,10 @@ char		*set_precision_str_wide(t_data *convert, char *str)
 			x++;
 		}
 		if (str[x] == '\n')
+		{
 			result[x++] = '\n';
+			i++;
+		}
 		j = 0;
 	}
 	result[x] = '\0';
@@ -120,7 +123,7 @@ char		*set_width_str_wide(t_data *convert, char *str)
 	len = ft_strlen(str);
 	n = amount_enters(str);
 	tmp = (char *)malloc(sizeof(char) * convert->width - len + n + 1);
-	tmp[(convert->width - len)] = '\0';
+	tmp[(convert->width - len + n)] = '\0';
 	if (convert->flags.fill_zeros)
 		ft_memset(tmp, '0', ((convert->width - len + n)));
 	else

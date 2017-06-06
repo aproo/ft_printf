@@ -53,6 +53,7 @@ char			*edit_bytes(char *sch, char **str, size_t len)
 		len--;
 	}
 	result = convert_to_integer(str, lenght);
+//	printf("char[%s] bytes[%zu]\n", result, lenght);
 	return (result);
 }
 

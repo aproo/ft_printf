@@ -61,6 +61,7 @@ char		*create_chars_wide(t_data *convert, wchar_t *str)
 {
 	char	*result;
 	char	*tmp;
+	size_t 	len_n;
 
 	convert_with_enter(&result, str);
 	if (convert->precision || convert->set_precision)
@@ -69,7 +70,8 @@ char		*create_chars_wide(t_data *convert, wchar_t *str)
 		result = set_precision_str_wide(convert, result);
 		free(tmp);
 	}
-	if (result && convert->width > ft_strlen(result))
+	len_n = amount_enters(result);
+	if (result && convert->width > (ft_strlen(result) - len_n))
 	{
 		tmp = result;
 		result = set_width_str_wide(convert, result);
