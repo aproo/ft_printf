@@ -32,7 +32,6 @@ OBJ_PRINT	=ft_printf.o \
 			identify_specifiers.o \
 			print_error.o \
 			print_result.o \
-			print_struct.o \
 			search_flags.o \
 			search_length.o \
 			search_precision.o \

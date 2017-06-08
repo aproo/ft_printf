@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - No
 */
 
 void			set_precision_pointer(t_data *convert, char **result)

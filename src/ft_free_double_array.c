@@ -14,8 +14,8 @@
 
 void		ft_free_double_array(char ***str)
 {
-	int 	i;
-	char 	**ptr;
+	int		i;
+	char	**ptr;
 
 	i = 0;
 	ptr = *str;
