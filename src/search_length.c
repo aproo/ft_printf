@@ -12,7 +12,11 @@
 
 #include "../includes/ft_printf.h"
 
-int		search_length(t_string *rsrc, t_data *convert)
+/*
+**	norm - OK; leaks - OK;
+*/
+
+int			search_length(t_string *rsrc, t_data *convert)
 {
 	char	ch;
 	char	ch_next;
@@ -20,30 +24,20 @@ int		search_length(t_string *rsrc, t_data *convert)
 	ch = *current_str(*rsrc, 0);
 	ch_next = *current_str(*rsrc, 1);
 	if (ch == 'h' && ch_next == 'h')
-	{
 		convert->lenght = HH;
-		rsrc->current_index++;
-	}
 	else if (ch == 'h')
 		convert->lenght = H;
 	else if (ch == 'l' && ch_next == 'l')
-	{
 		convert->lenght = LL;
-		rsrc->current_index++;
-	}
 	else if (ch == 'l')
 		convert->lenght = L;
-	
 	else if (ch == 'j')
 		convert->lenght = J;
 	else if (ch == 'z')
 		convert->lenght = Z;
 	else
-	{
-//		printf("Search_length done!	[No lenght]\n");
 		return (OK);
-	}
-//	printf("Search_length done!	[%i]\n", convert->lenght);
-	rsrc->current_index++;
+	rsrc->current_index += (convert->lenght == LL ||
+			convert->lenght == HH) ? 2 : 1;
 	return (OK);
 }

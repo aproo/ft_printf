@@ -13,10 +13,11 @@
 #include "../includes/ft_printf.h"
 
 /*
-	sSpdDioOuUxXcC
+**	sSpdDioOuUxXcC
+** 	norm - OK; leaks - OK
 */
 
-int		identify_specifiers(t_string *rsrc, t_data *convert)
+int			identify_specifiers(t_string *rsrc, t_data *convert)
 {
 	char	ch;
 
@@ -31,8 +32,8 @@ int		identify_specifiers(t_string *rsrc, t_data *convert)
 	}
 	else if (((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) && ch)
 	{
-			convert->specifier = '&';
-			rsrc->current_index++;
+		convert->specifier = '&';
+		rsrc->current_index++;
 	}
 	return (OK);
 }

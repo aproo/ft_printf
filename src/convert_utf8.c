@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - NO
 */
 
 char			*convert_to_integer(char **str, size_t len)
@@ -26,7 +26,7 @@ char			*convert_to_integer(char **str, size_t len)
 		return ("NULL");
 	while (i < len)
 	{
-		result[i] = ft_binary_to_decimal(str[i]);
+		result[i] = (char)ft_binary_to_decimal(str[i]);
 		i++;
 	}
 	result[i] = '\0';
@@ -53,7 +53,6 @@ char			*edit_bytes(char *sch, char **str, size_t len)
 		len--;
 	}
 	result = convert_to_integer(str, lenght);
-//	printf("char[%s] bytes[%zu]\n", result, lenght);
 	return (result);
 }
 
@@ -64,7 +63,7 @@ char			*first_byte(size_t len, char *first_byte)
 	i = 0;
 	while (i < 8)
 	{
-		first_byte[i] = ((len > i) && (len > 1)) ? '1' : '0';
+		first_byte[i] = (char)(((len > i) && (len > 1)) ? '1' : '0');
 		i++;
 	}
 	first_byte[i] = '\0';
@@ -78,23 +77,23 @@ char			*other_byte(char *other_byte)
 	i = 0;
 	while (i < 8)
 	{
-		other_byte[i] = (i == 0) ? '1' : '0';
+		other_byte[i] = (char)((i == 0) ? '1' : '0');
 		i++;
 	}
 	other_byte[i] = '\0';
 	return (other_byte);
 }
 
-char			*convert_utf8(char *sch, size_t len)
+char			*convert_utf8(char **sch, size_t len, size_t byte)
 {
 	char		**str;
-	size_t		byte;
 	char		*result;
+	char		*tmp;
 
-	byte = 0;
+	tmp = *sch;
 	if (!(str = (char **)malloc(sizeof(char *) * (len + 1))))
 		return (NULL);
-	while (byte <= len)
+	while (byte < len)
 		if (!(str[byte++] = (char *)malloc(sizeof(char) * 9)))
 			return (NULL);
 	byte = 1;
@@ -107,6 +106,8 @@ char			*convert_utf8(char *sch, size_t len)
 		byte++;
 	}
 	str[byte - 1] = NULL;
-	result = edit_bytes(sch, str, len);
+	result = edit_bytes(*sch, str, len);
+	ft_free_double_array(&str);
+	free(tmp);
 	return (result);
 }

@@ -13,16 +13,15 @@
 #include "../includes/ft_printf.h"
 
 /*
-
-# define [H	1]	 [HH	2]	[L	3]	[LL		4]	[J	5]	 [Z	6]
-
+** define [H	1]	 [HH	2]	[L	3]	[LL		4]	[J	5]	 [Z	6]
+** norm - OK; leaks - No;
 */
 
-void		set_flags_decimal(char sp, t_flags flags, char **string)
+void				set_flags_decimal(char sp, t_flags flags, char **string)
 {
-	char 	*flag;
-	char	*result;
-	char 	*tmp;
+	char			*flag;
+	char			*result;
+	char			*tmp;
 
 	if (**string >= '0' && **string <= '9')
 	{
@@ -41,9 +40,9 @@ void		set_flags_decimal(char sp, t_flags flags, char **string)
 	}
 }
 
-static intmax_t		set_leght_sign_decimal(int	len, va_list *args)
+static intmax_t		set_leght_sign_decimal(int len, va_list *args)
 {
-	intmax_t	value;
+	intmax_t		value;
 
 	value = 0;
 	if (len == L)
@@ -63,9 +62,9 @@ static intmax_t		set_leght_sign_decimal(int	len, va_list *args)
 	return (value);
 }
 
-static uintmax_t	set_leght_usign_decimal(int	len, va_list *args)
+static uintmax_t	set_leght_usign_decimal(int len, va_list *args)
 {
-	uintmax_t	value;
+	uintmax_t		value;
 
 	value = 0;
 	if (len == L)
@@ -85,30 +84,30 @@ static uintmax_t	set_leght_usign_decimal(int	len, va_list *args)
 	return (value);
 }
 
-char		*create_str_decimal(t_data *convert, va_list *args)
+char				*create_str_decimal(t_data *convert, va_list *args)
 {
-	intmax_t	value;
-	uintmax_t	uvalue;
-	char		*result;
+	intmax_t		value;
+	uintmax_t		uvalue;
+	char			*result;
 
 	if (convert->specifier == 'U' || convert->specifier == 'u')
 	{
 		uvalue = set_leght_usign_decimal(convert->lenght, args);
-        if (convert->set_precision && convert->specifier != '%' && !uvalue)
-            result = ft_strdup("");
+		if (convert->set_precision && convert->specifier != '%' && !uvalue)
+			result = ft_strdup("");
 		else
-            result = ft_itoa_uint_max(uvalue, 10);
+			result = ft_itoa_uint_max(uvalue, 10);
 	}
 	else
 	{
 		value = set_leght_sign_decimal(convert->lenght, args);
-        if (convert->set_precision && convert->specifier != '%' && !value)
-            result = ft_strdup("");
+		if (convert->set_precision && convert->specifier != '%' && !value)
+			result = ft_strdup("");
 		else
-            result= ft_itoa_int_max(value, 10);
+			result = ft_itoa_int_max(value, 10);
 	}
+	convert->free = 1;
 	set_flags_decimal(convert->specifier, convert->flags, &result);
 	set_precision_numbers(convert, &result);
 	return (result);
 }
-

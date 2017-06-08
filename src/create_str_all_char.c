@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-**	norm - OK; leaks - ?;
+**	norm - OK; leaks - NO;
 */
 
 char		*convert_char(wchar_t ch, size_t len, int i, int div)
@@ -34,24 +34,24 @@ char		*convert_char(wchar_t ch, size_t len, int i, int div)
 	y = (int)ch;
 	while (y && (div = y % 2) >= 0)
 	{
-		sch[i++] = div + '0';
+		sch[i++] = (char)(div + '0');
 		y /= 2;
 	}
 	sch[i] = '\0';
-	sch = ft_str_reverse(sch);
-	return (convert_utf8(sch, len));
+	sch = ft_str_reverse(&sch);
+	return (convert_utf8(&sch, len, 0));
 }
 
 void		create_char(t_string *rsrc, t_data *convert, unsigned char ch)
 {
 	int		i;
 
-	i = convert->width;
+	i = (int)convert->width;
 	if (convert->flags.left_justify)
 		ft_putchar(ch);
 	while (--i > 0)
 	{
-		ft_putchar(((convert->flags.fill_zeros) ? '0' : ' '));
+		ft_putchar((char)((convert->flags.fill_zeros) ? '0' : ' '));
 		rsrc->count_print++;
 	}
 	if (!convert->flags.left_justify)
@@ -70,8 +70,9 @@ char		*create_str_char_wide(t_string *rsrc, t_data *convert, wchar_t ch)
 	}
 	else
 	{
-		ft_putchar(ch);
+		ft_putchar((char)ch);
 		rsrc->count_print++;
 	}
-	return ("");
+	convert->free = 1;
+	return (ft_strdup(""));
 }

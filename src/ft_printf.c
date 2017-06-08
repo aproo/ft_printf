@@ -12,7 +12,9 @@
 
 #include "../includes/ft_printf.h"
 
-//no leaks
+/*
+**	norm - OK; leaks - OK;
+*/
 
 void	search_specificars(va_list *args, t_string *rsrc)
 {
@@ -41,5 +43,6 @@ int		ft_printf(const char *format, ...)
 	va_start(args, format);
 	search_specificars(&args, &rsrc);
 	va_end(args);
-	return (rsrc.count_print);
+	rsrc.str = NULL;
+	return ((int)rsrc.count_print);
 }

@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-**	norm - OK; leaks - ?;
+**	norm - OK; leaks - NO;
 */
 
 char		*set_precision_str(t_data *convert, char *str)
@@ -29,6 +29,7 @@ char		*set_precision_str(t_data *convert, char *str)
 		result[i] = str[i];
 		i++;
 	}
+	convert->free = 1;
 	return (result);
 }
 
@@ -54,6 +55,7 @@ char		*set_width_str(t_data *convert, char *str)
 		result[1] = 'x';
 		result[convert->width - ft_strlen(str) + 1] = '0';
 	}
+	convert->free = 1;
 	return (result);
 }
 
@@ -61,13 +63,13 @@ char		*create_chars_wide(t_data *convert, wchar_t *str)
 {
 	char	*result;
 	char	*tmp;
-	size_t 	len_n;
+	size_t	len_n;
 
 	convert_with_enter(&result, str);
 	if (convert->precision || convert->set_precision)
 	{
 		tmp = result;
-		result = set_precision_str_wide(convert, result);
+		result = set_precision_str_wide(convert, result, 0, 0);
 		free(tmp);
 	}
 	len_n = amount_enters(result);
@@ -78,21 +80,36 @@ char		*create_chars_wide(t_data *convert, wchar_t *str)
 		free(tmp);
 	}
 	convert_without_enter(&result);
+	convert->free = 1;
 	return (result);
 }
 
 char		*create_str_string(t_data *convert, char *str)
 {
 	char	*result;
+	char	*tmp;
 
-	if (!str)
+	tmp = NULL;
+	if (!str && (convert->free = 1 > 0))
+	{
 		result = ft_strdup("(null)");
+		tmp = result;
+	}
 	else
 		result = str;
 	if (convert->precision || convert->set_precision)
-		result = set_precision_str(convert, str);
+	{
+		result = set_precision_str(convert, result);
+		if (tmp)
+			free(tmp);
+		tmp = result;
+	}
 	if (result && (convert->width > ft_strlen(result)))
+	{
 		result = set_width_str(convert, result);
+		if (tmp)
+			free(tmp);
+	}
 	return (result);
 }
 
@@ -105,5 +122,6 @@ char		*create_str_string_wide(t_string *rsrc, t_data *cnv, wchar_t *str)
 		ft_putstr("(null)");
 		rsrc->count_print += 6;
 	}
-	return ("");
+	cnv->free = 1;
+	return (ft_strdup(""));
 }

@@ -27,10 +27,12 @@ void	ft_szero(t_string *rsrc, t_data *convert, t_flags *flags)
 		convert->precision = 0;
 		convert->lenght = 0;
 		convert->set_precision = 0;
+		convert->specifier = 0;
+		convert->free = 0;
 	}
 	if (flags)
 	{
-		flags->left_justify = 0;;
+		flags->left_justify = 0;
 		flags->sign = 0;
 		flags->space = 0;
 		flags->fill_zeros = 0;

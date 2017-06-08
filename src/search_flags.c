@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - OK
 */
 
 int			search_flags(t_string *rsrc, t_flags *flags)

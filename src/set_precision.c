@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-**	norm - OK; leaks - ?;
+**	norm - OK; leaks - No;
 */
 
 static int	spec_is_numbers(char ch)
@@ -23,7 +23,8 @@ static int	spec_is_numbers(char ch)
 			ch == 'X') ? 1 : 0);
 }
 
-void		check_width_numbers(t_data *cnv, char **str, int width, int sign)
+void		check_width_numbers(t_data *cnv, char **str,
+								size_t width, size_t sign)
 {
 	char	*tmp;
 	char	*new;
@@ -49,7 +50,7 @@ void		check_width_numbers(t_data *cnv, char **str, int width, int sign)
 	free(new);
 }
 
-void		fill_to_string(int size, char ch, char **string, int sign)
+void		fill_to_string(size_t size, char ch, char **string, size_t sign)
 {
 	char	*tmp;
 	char	*zeros;
@@ -68,8 +69,8 @@ void		fill_to_string(int size, char ch, char **string, int sign)
 
 void		set_precision_numbers(t_data *convert, char **str)
 {
-	int		size;
-	int		sign;
+	size_t	size;
+	size_t	sign;
 
 	size = ft_strlen(*str);
 	if (spec_is_numbers(convert->specifier) && convert->specifier != 'x' &&
@@ -77,7 +78,7 @@ void		set_precision_numbers(t_data *convert, char **str)
 		sign = (**str == '+' || **str == '-' || **str == ' ') ? 1 : 0;
 	else
 		sign = (str[0][1] == 'x' || str[0][1] == 'X') ? 2 : 0;
-	if ((size - sign) < convert->precision &&
+	if ((int)(size - sign) < convert->precision &&
 			spec_is_numbers(convert->specifier))
 		fill_to_string((convert->precision - (size - sign)), '0', str, sign);
 	if (convert->width > ft_strlen(*str))

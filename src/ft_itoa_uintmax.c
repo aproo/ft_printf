@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - No?
 */
 
 char		*ft_itoa_uint_max(uintmax_t value, int base)

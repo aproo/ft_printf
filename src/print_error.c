@@ -12,9 +12,8 @@
 
 #include "../includes/ft_printf.h"
 
-int		error_sign_decimal(intmax_t value, int len)
+int			error_sign_decimal(intmax_t value, int len)
 {
-
 	if (len == HH && (value < INT8_MIN || value > INT8_MAX))
 	{
 		ft_putstr("ERROR :format signed char\n");
@@ -54,8 +53,8 @@ int			error(t_string *rsrc, t_data *convert)
 {
 	int		lenght;
 	char	spec;
-	(void)rsrc;
 
+	(void)rsrc;
 	spec = convert->specifier;
 	lenght = convert->lenght;
 	return (OK);

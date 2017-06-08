@@ -44,7 +44,8 @@ OBJ_PRINT	=ft_printf.o \
 			convert_utf8.o \
 			ft_itoa_uint_max_upper.o \
 			add_fixs.o \
-			set_precision_str_wide.o
+			set_precision_str_wide.o \
+			ft_free_double_array.o
 
 OBJ_LIBFT	= ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_memchr.o \
 		ft_memcmp.o ft_strlen.o ft_strdup.o ft_strcpy.o ft_strncpy.o ft_strcat.o \

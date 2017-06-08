@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - OK
 */
 
 int		search_width(va_list *args, t_string *rsrc, t_data *convert)
@@ -30,7 +30,7 @@ int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 	}
 	else if (ft_isdigit(ch))
 	{
-		convert->width = ft_atoi(rsrc->str + rsrc->current_index);
+		convert->width = (size_t)(ft_atoi(rsrc->str + rsrc->current_index));
 		i = convert->width;
 		while (i)
 		{

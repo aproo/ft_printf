@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 
 /*
-**	Norm - OK, leaks - ?
+**	Norm - OK, leaks - No?
 */
 
 static uintmax_t	set_leght_hexadecimal(int len, va_list *args)
@@ -44,6 +44,7 @@ char				*create_str_hexadecimal(t_data *convert, va_list *args)
 	uintmax_t		value;
 	char			*result;
 
+	result = NULL;
 	value = set_leght_hexadecimal(convert->lenght, args);
 	if (convert->set_precision && convert->specifier != '%' && !value)
 		result = ft_strdup("");
@@ -60,6 +61,7 @@ char				*create_str_hexadecimal(t_data *convert, va_list *args)
 			result = ft_strjoin("0X", tmp);
 		free(tmp);
 	}
+	convert->free = 1;
 	set_precision_numbers(convert, &result);
 	return (result);
 }

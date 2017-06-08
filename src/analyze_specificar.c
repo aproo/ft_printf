@@ -13,13 +13,13 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - Ok, leaks - have not.
+** Norm - Ok, leaks - OK.
 */
 
 void	analyze_specificar(va_list *args, t_string *rsrc)
 {
-	t_data	convert;
 	char	ch;
+	t_data	convert;
 
 	rsrc->current_index++;
 	ft_szero(NULL, &convert, &convert.flags);

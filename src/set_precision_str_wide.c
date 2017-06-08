@@ -16,10 +16,10 @@
 **	norm - OK; leaks - ?;
 */
 
-int			amount_enters(char *str)
+size_t		amount_enters(char *str)
 {
 	int		i;
-	int		n;
+	size_t	n;
 
 	i = -1;
 	n = 0;
@@ -34,7 +34,7 @@ int			amount_enters(char *str)
 void		convert_without_enter(char **str)
 {
 	int		i;
-	int		n;
+	size_t	n;
 	char	*new;
 	char	*tmp;
 
@@ -57,7 +57,7 @@ void		convert_with_enter(char **result, wchar_t *str)
 {
 	size_t	i;
 	char	*tmp;
-	char	*fre;
+	char	*freee;
 
 	i = 0;
 	*result = ft_strdup("");
@@ -68,28 +68,24 @@ void		convert_with_enter(char **result, wchar_t *str)
 		else
 		{
 			tmp = ft_strnew(1);
-			tmp[0] = str[i];
+			tmp[0] = (char)str[i];
 		}
-		fre = *result;
+		freee = *result;
 		*result = ft_strjoin(*result, tmp);
-		free(fre);
+		free(freee);
 		free(tmp);
-		fre = *result;
+		freee = *result;
 		*result = ft_strjoin(*result, "\n");
-		free(fre);
+		free(freee);
 		i++;
 	}
 }
 
-char		*set_precision_str_wide(t_data *convert, char *str)
+char		*set_precision_str_wide(t_data *convert, char *str, int j, int x)
 {
 	int		i;
-	int		j;
-	int		x;
 	char	*result;
 
-	j = 0;
-	x = 0;
 	i = convert->precision;
 	result = (char *)malloc(sizeof(char) * ((convert->precision * 2) + 1));
 	result[(convert->precision * 2)] = '\0';
@@ -115,8 +111,8 @@ char		*set_precision_str_wide(t_data *convert, char *str)
 
 char		*set_width_str_wide(t_data *convert, char *str)
 {
-	int		n;
-	int		len;
+	size_t	n;
+	size_t	len;
 	char	*tmp;
 	char	*result;
 

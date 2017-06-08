@@ -13,26 +13,29 @@
 #include "../includes/ft_printf.h"
 
 /*
-** Norm - OK, leaks - ?
+** Norm - OK, leaks - OK
 */
 
-char			*ft_str_reverse(char *str)
+char			*ft_str_reverse(char **str)
 {
 	size_t		i;
 	char		*new;
 	size_t		size;
+	char		*tmp;
 
 	i = 0;
-	if (!str)
+	tmp = *str;
+	if (!*str)
 		return (0);
-	size = ft_strlen(str);
+	size = ft_strlen(*str);
 	if (!(new = (char *)malloc(sizeof(char) * size + 1)))
 		return (0);
 	new[size] = '\0';
 	while (size > 0)
 	{
-		new[i++] = str[size - 1];
+		new[i++] = str[0][size - 1];
 		size--;
 	}
+	free(tmp);
 	return (new);
 }

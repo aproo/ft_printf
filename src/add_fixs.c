@@ -13,14 +13,14 @@
 #include "../includes/ft_printf.h"
 
 /*
-**	Norm - OK, leaks -? sSpdDioOuUxXcC
+**	Norm - OK, leaks - OK		sSpdDioOuUxXcC
 */
 
-void			add_fix_main(t_string *rsrc, t_data *convert)
+void		add_fix_main(t_string *rsrc, t_data *convert)
 {
-	(void)rsrc;
-	char		sp;
+	char	sp;
 
+	(void)rsrc;
 	sp = convert->specifier;
 	if (convert->flags.fill_zeros && (convert->flags.left_justify))
 		convert->flags.fill_zeros = 0;
