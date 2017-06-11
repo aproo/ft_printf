@@ -25,7 +25,8 @@ int			identify_specifiers(t_string *rsrc, t_data *convert)
 		rsrc->current_index++;
 	if (ch == 's' || ch == 'S' || ch == 'p' || ch == 'd' || ch == 'D' || \
 		ch == 'i' || ch == 'o' || ch == 'O' || ch == 'u' || ch == 'U' || \
-		ch == 'x' || ch == 'X' || ch == 'c' || ch == 'C' || ch == '%')
+		ch == 'x' || ch == 'X' || ch == 'c' || ch == 'C' || ch == '%' || \
+		ch == 'n')
 	{
 		convert->specifier = ch;
 		rsrc->current_index++;

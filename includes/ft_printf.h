@@ -68,6 +68,7 @@ void			analyze_specificar(va_list *args, t_string *rsrc);
 int				check_all(va_list *args, t_string *rsrc, t_data *convert);
 int				error(t_string *rsrc, t_data *convert);
 int				ft_it_is_spec(char ch);
+void			rec_count_print(t_string *rsrc, void *ptr);
 
 int				search_flags(t_string *rsrc, t_flags *flags);
 int				search_width(va_list *args, t_string *rsrc, t_data *convert);

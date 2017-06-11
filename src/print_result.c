@@ -63,6 +63,8 @@ void		print_result(va_list *args, t_string *rsrc, t_data *convert)
 			(convert->specifier == 'c' && convert->lenght == L) ||
 			(convert->specifier == 'C'))
 		create_char(rsrc, convert, (unsigned char)va_arg(*args, int));
+	else if (convert->specifier == 'n')
+		rec_count_print(rsrc, va_arg(*args, void *));
 	else
 	{
 		result = choose_specifiers(args, rsrc, convert, convert->specifier);

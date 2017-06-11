@@ -21,7 +21,7 @@ int		ft_it_is_spec(char ch)
 	if (ch == 's' || ch == 'S' || ch == 'p' || ch == 'd' || ch == 'D' || \
 		ch == 'i' || ch == 'o' || ch == 'O' || ch == 'u' || ch == 'U' || \
 		ch == 'x' || ch == 'X' || ch == 'c' || ch == 'C' || ch == '%' || \
-		ch == '\0')
+		ch == '\0' || ch == 'n')
 	{
 		return (1);
 	}
