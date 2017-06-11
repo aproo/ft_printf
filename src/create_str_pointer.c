@@ -47,7 +47,7 @@ char			*create_str_pointer(t_data *convert, void *pointer)
 	free(tmp);
 	if (convert->precision > ((int)ft_strlen(result) - 2))
 		set_precision_pointer(convert, &result);
-	if ((result && (convert->width > ft_strlen(result))))
+	if ((result && (((size_t)convert->width > ft_strlen(result)))))
 	{
 		tmp = result;
 		result = set_width_str(convert, result);

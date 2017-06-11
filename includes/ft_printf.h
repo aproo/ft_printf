@@ -13,16 +13,12 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
 # include <wchar.h>
 # include <wctype.h>
 # include <inttypes.h>
 # include <stdint.h>
-# include <string.h>
 
 # define ERROR	1
 # define OK		0
@@ -54,7 +50,7 @@ typedef struct	s_flags
 typedef struct	s_data
 {
 	t_flags		flags;
-	size_t		width;
+	int			width;
 	int			precision;
 	int			set_precision;
 	int			lenght;
@@ -71,12 +67,13 @@ void			ft_szero(t_string *rsrc, t_data *convert, t_flags *flags);
 void			analyze_specificar(va_list *args, t_string *rsrc);
 int				check_all(va_list *args, t_string *rsrc, t_data *convert);
 int				error(t_string *rsrc, t_data *convert);
+int				ft_it_is_spec(char ch);
 
 int				search_flags(t_string *rsrc, t_flags *flags);
 int				search_width(va_list *args, t_string *rsrc, t_data *convert);
 int				search_precision(va_list *args, t_string *rsrc,
 					t_data *convert);
-int				search_length(t_string *rsrc, t_data *convert);
+int				search_length(t_string *rsrc, t_data *convert, char ch);
 int				identify_specifiers(t_string *rsrc, t_data *convert);
 
 void			print_struct(t_string *rsrc, t_data *convert, t_flags *flags);

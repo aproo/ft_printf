@@ -73,7 +73,7 @@ char		*create_chars_wide(t_data *convert, wchar_t *str)
 		free(tmp);
 	}
 	len_n = amount_enters(result);
-	if (result && convert->width > (ft_strlen(result) - len_n))
+	if (result && ((size_t)convert->width > (ft_strlen(result) - len_n)))
 	{
 		tmp = result;
 		result = set_width_str_wide(convert, result);
@@ -104,7 +104,7 @@ char		*create_str_string(t_data *convert, char *str)
 			free(tmp);
 		tmp = result;
 	}
-	if (result && (convert->width > ft_strlen(result)))
+	if (result && (((size_t)convert->width > ft_strlen(result))))
 	{
 		result = set_width_str(convert, result);
 		if (tmp)

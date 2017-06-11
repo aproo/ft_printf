@@ -41,7 +41,8 @@ void		check_width_numbers(t_data *cnv, char **str,
 		*str = ft_strjoin(tmp, new);
 	else
 		*str = ft_strjoin(new, tmp);
-	if (sign > 0 && cnv->flags.fill_zeros)
+	if (sign > 0 && cnv->flags.fill_zeros && cnv->set_precision == 0 &&
+			cnv->precision == 0)
 	{
 		str[0][((sign == 1) ? 0 : 1)] = ((sign == 1) ? tmp[0] : tmp[1]);
 		str[0][((sign == 1) ? width : ++width)] = '0';
@@ -81,7 +82,7 @@ void		set_precision_numbers(t_data *convert, char **str)
 	if ((int)(size - sign) < convert->precision &&
 			spec_is_numbers(convert->specifier))
 		fill_to_string((convert->precision - (size - sign)), '0', str, sign);
-	if (convert->width > ft_strlen(*str))
+	if ((size_t)convert->width > ft_strlen(*str))
 		check_width_numbers(convert, str, (convert->width - ft_strlen(*str)),
 							sign);
 }

@@ -31,4 +31,14 @@ void		add_fix_main(t_string *rsrc, t_data *convert)
 		convert->lenght = L;
 	if (sp == 'p' && (convert->precision || convert->set_precision))
 		convert->flags.fill_zeros = 0;
+	if (convert->precision < 0)
+	{
+		convert->precision = 0;
+		convert->set_precision = 0;
+	}
+	if (convert->width < 0)
+	{
+		convert->width = -convert->width;
+		convert->flags.left_justify = 1;
+	}
 }

@@ -42,5 +42,5 @@ int			search_flags(t_string *rsrc, t_flags *flags)
 		}
 		return (OK);
 	}
-	return (OK);
+	return (ERROR);
 }

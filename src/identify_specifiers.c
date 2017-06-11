@@ -21,7 +21,8 @@ int			identify_specifiers(t_string *rsrc, t_data *convert)
 {
 	char	ch;
 
-	ch = *current_str(*rsrc, 0);
+	while ((ch = *current_str(*rsrc, 0)) == ' ')
+		rsrc->current_index++;
 	if (ch == 's' || ch == 'S' || ch == 'p' || ch == 'd' || ch == 'D' || \
 		ch == 'i' || ch == 'o' || ch == 'O' || ch == 'u' || ch == 'U' || \
 		ch == 'x' || ch == 'X' || ch == 'c' || ch == 'C' || ch == '%')
@@ -34,6 +35,7 @@ int			identify_specifiers(t_string *rsrc, t_data *convert)
 	{
 		convert->specifier = '&';
 		rsrc->current_index++;
+		return (OK);
 	}
-	return (OK);
+	return (ERROR);
 }

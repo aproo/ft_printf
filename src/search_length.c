@@ -16,12 +16,12 @@
 **	norm - OK; leaks - OK;
 */
 
-int			search_length(t_string *rsrc, t_data *convert)
+int			search_length(t_string *rsrc, t_data *convert, char ch)
 {
-	char	ch;
 	char	ch_next;
+	int		last_len;
 
-	ch = *current_str(*rsrc, 0);
+	last_len = convert->lenght;
 	ch_next = *current_str(*rsrc, 1);
 	if (ch == 'h' && ch_next == 'h')
 		convert->lenght = HH;
@@ -36,8 +36,10 @@ int			search_length(t_string *rsrc, t_data *convert)
 	else if (ch == 'z')
 		convert->lenght = Z;
 	else
-		return (OK);
+		return (ERROR);
 	rsrc->current_index += (convert->lenght == LL ||
 			convert->lenght == HH) ? 2 : 1;
+	if (last_len > convert->lenght)
+		convert->lenght = last_len;
 	return (OK);
 }

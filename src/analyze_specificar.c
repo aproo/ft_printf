@@ -16,6 +16,26 @@
 ** Norm - Ok, leaks - OK.
 */
 
+int		ft_it_is_spec(char ch)
+{
+	if (ch == 's' || ch == 'S' || ch == 'p' || ch == 'd' || ch == 'D' || \
+		ch == 'i' || ch == 'o' || ch == 'O' || ch == 'u' || ch == 'U' || \
+		ch == 'x' || ch == 'X' || ch == 'c' || ch == 'C' || ch == '%' || \
+		ch == '\0')
+	{
+		return (1);
+	}
+	else if (ch == 'h' || ch == 'l' || ch == 'z' || ch == 'j' || ch == '.' || \
+			ch == '+' || ch == ' ' || ch == '0' || ch == '#' || ch == '-' ||
+			ch == '*' || ft_isdigit(ch))
+		return (0);
+	else if (((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) && ch)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 void	analyze_specificar(va_list *args, t_string *rsrc)
 {
 	char	ch;
@@ -41,14 +61,24 @@ void	analyze_specificar(va_list *args, t_string *rsrc)
 
 int		check_all(va_list *args, t_string *rsrc, t_data *convert)
 {
-	if (search_flags(rsrc, &convert->flags) == ERROR)
-		return (ERROR);
-	if (search_width(args, rsrc, convert) == ERROR)
-		return (ERROR);
-	if (search_precision(args, rsrc, convert) == ERROR)
-		return (ERROR);
-	if (search_length(rsrc, convert) == ERROR)
-		return (ERROR);
+	int		spec;
+	int		nodata;
+
+	spec = OK;
+	nodata = ERROR;
+	while (spec == OK && nodata != OK)
+	{
+		nodata = OK;
+		if (search_flags(rsrc, &convert->flags) == OK)
+			nodata++;
+		if (search_width(args, rsrc, convert) == OK)
+			nodata++;
+		if (search_precision(args, rsrc, convert) == OK)
+			nodata++;
+		if (search_length(rsrc, convert, *current_str(*rsrc, 0)) == OK)
+			nodata++;
+		spec = ft_it_is_spec(*current_str(*rsrc, 0));
+	}
 	if (identify_specifiers(rsrc, convert) == ERROR)
 		return (ERROR);
 	add_fix_main(rsrc, convert);

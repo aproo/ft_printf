@@ -19,7 +19,7 @@
 int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 {
 	char	ch;
-	size_t	i;
+	int		i;
 
 	ch = *current_str(*rsrc, 0);
 	if (ch == '*')
@@ -30,13 +30,14 @@ int		search_width(va_list *args, t_string *rsrc, t_data *convert)
 	}
 	else if (ft_isdigit(ch))
 	{
-		convert->width = (size_t)(ft_atoi(rsrc->str + rsrc->current_index));
+		convert->width = (ft_atoi(rsrc->str + rsrc->current_index));
 		i = convert->width;
 		while (i)
 		{
 			i /= 10;
 			rsrc->current_index++;
 		}
+		return (OK);
 	}
-	return (OK);
+	return (ERROR);
 }
